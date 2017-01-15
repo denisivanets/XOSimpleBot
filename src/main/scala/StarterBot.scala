@@ -32,6 +32,7 @@ object XOBot extends App with TelegramBot with Polling with Commands with ChatAc
     "Type /step [number of area](1-9)\n(example:/step 5) for make step" +
     "\nYour char is X"
     reply(info)
+    println("sssss")
   }
 
   on("/newgame") { implicit message => args =>
