@@ -1,6 +1,5 @@
 import java.util
 import java.util.concurrent.ConcurrentHashMap
-
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{HttpRequest, Uri}
 import akka.http.scaladsl.unmarshalling.Unmarshal
@@ -32,7 +31,6 @@ object XOBot extends App with TelegramBot with Polling with Commands with ChatAc
     "Type /step [number of area](1-9)\n(example:/step 5) for make step" +
     "\nYour char is X"
     reply(info)
-    println("sssss")
   }
 
   on("/newgame") { implicit message => args =>
@@ -45,6 +43,9 @@ object XOBot extends App with TelegramBot with Polling with Commands with ChatAc
   }
 
   on("/step") { implicit message => args =>
+    val thread = new Thread(new Runnable{
+      override def run={
+        println(Thread.currentThread().getName)
     val isGameExists = if(games.contains(message.sender)) true else false
     val argsIsValid = MessageHolder.checkValid(args.mkString)
     if(argsIsValid && isGameExists){
@@ -67,6 +68,9 @@ object XOBot extends App with TelegramBot with Polling with Commands with ChatAc
         "Type /newgame for create new game" +
         "")
     }
+      }
+    })
+    thread.start()
   }
 
   run()
