@@ -1,2 +1,2 @@
-# StarterBot
-Basic setup for building Telegram bots in Scala (telegrambot4s)
+# XO Simple Bot
+Бот работает, пока запущен сам проект (не стал искать хост). Все инструкции и команды предоставленны в интерфейсе самого бота, при вводе /start или /help
