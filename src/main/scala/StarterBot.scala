@@ -12,19 +12,6 @@ object XOBot extends App with TelegramBot with Polling with Commands with ChatAc
   override def token: String = 
     scala.io.Source.fromFile("bot.token").getLines().next
 
-  on("/doge") { implicit message => args =>
-    val url = "http://dogr.io/" + (args mkString "/") + ".png?split=false"
-    for {
-      response <- Http().singleRequest(HttpRequest(uri = Uri(url)))
-      if response.status.isSuccess()
-      bytes <-  Unmarshal(response).to[ByteString]
-    } {
-      val photo = InputFile.FromByteString("doge.png", bytes)
-      uploadingPhoto // hint the user
-      api.request(SendPhoto(message.sender, photo))
-    }
-  }
-
   on("/start") { implicit message => args =>
     val info = "Hello!Let's start\n" +
     "Type /newgame for start new game\n" +
