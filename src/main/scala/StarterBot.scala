@@ -32,7 +32,6 @@ object XOBot extends App with TelegramBot with Polling with Commands with ChatAc
   on("/step") { implicit message => args =>
     val thread = new Thread(new Runnable{
       override def run={
-        println(Thread.currentThread().getName)
     val isGameExists = if(games.contains(message.sender)) true else false
     val argsIsValid = MessageHolder.checkValid(args.mkString)
     if(argsIsValid && isGameExists){
